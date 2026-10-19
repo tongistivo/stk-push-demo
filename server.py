@@ -374,13 +374,18 @@ def javascript():
 @app.route("/api/test")
 @limiter.limit("30 per minute")
 def health():
+    problems = config_problems()
+
     body = {
         "success": True,
         "message": "Backend is working",
-        "configured": not config_problems(),
+        "configured": not problems,
+        "configuration_problems": problems,
     }
-    if request.args.get("deep") == "1":  # also wakes the database
+
+    if request.args.get("deep") == "1":
         body["database"] = "ok" if db.ping() else "unavailable"
+
     return body
 
 
