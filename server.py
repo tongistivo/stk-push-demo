@@ -198,6 +198,11 @@ def _daraja_post(url, payload_builder):
             headers={"Authorization": f"Bearer {token}"},
             timeout=(5, 25),
         )
+        app.logger.info(
+            "Daraja POST response: endpoint=%s status=%s",
+            url.rsplit("/", 1)[-1],
+            resp.status_code,
+        )
         if resp.status_code != 401 or attempt == 2:
             return resp
     return resp  # pragma: no cover
@@ -433,8 +438,11 @@ def pay():
     try:
         resp = _daraja_post(STK_URL, payload)
         result = resp.json()
-    except DarajaError:
-        app.logger.error("Could not authenticate with Daraja")
+    except DarajaError as exc:
+        app.logger.error(
+            "Daraja request preparation failed: error_type=%s",
+            str(exc)[:40],
+        )
         return {"success": False, "message": "Could not reach the payment provider. Try again."}, 502
     except requests.Timeout:
         app.logger.error("Daraja timed out")
