@@ -403,7 +403,9 @@ def health():
     if request.args.get("deep") == "1":
         body["database"] = "ok" if db.ping() else "unavailable"
 
-    return body    if not isinstance(data, dict):
+    return body
+
+    if not isinstance(data, dict):
         return {"success": False, "message": "Send the details as a JSON object"}, 400
 
     phone = normalize_phone(data.get("phone"))
