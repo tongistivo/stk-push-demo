@@ -388,23 +388,6 @@ def health():
 @limiter.limit("5 per minute;30 per hour")
 def pay():
     data = request.get_json(silent=True)
-@app.route("/api/test")
-@limiter.limit("30 per minute")
-def health():
-    problems = config_problems()
-
-    body = {
-        "success": True,
-        "message": "Backend is working",
-        "configured": not problems,
-        "configuration_problems": problems,
-    }
-
-    if request.args.get("deep") == "1":
-        body["database"] = "ok" if db.ping() else "unavailable"
-
-    return body
-
     if not isinstance(data, dict):
         return {"success": False, "message": "Send the details as a JSON object"}, 400
 
