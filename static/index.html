@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>M-Pesa Payment</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="payment-page">
+
+        <section class="payment-card">
+
+            <div class="payment-header">
+                <p class="eyebrow">SANDBOX DEMO</p>
+
+                <h1>M-Pesa Payment</h1>
+
+                <p class="description">
+                    Enter the amount and M-Pesa number to continue.
+                </p>
+            </div>
+
+
+            <form id="paymentForm" novalidate>
+
+                <div class="form-group">
+
+                    <label for="amount">
+                        Amount
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="currency">
+                            KSh
+                        </span>
+
+                        <input
+                            type="number"
+                            id="amount"
+                            name="amount"
+                            placeholder="100"
+                            min="1"
+                            step="1"
+                            inputmode="numeric"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        M-Pesa Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        placeholder="0712345678"
+                        inputmode="numeric"
+                        autocomplete="tel"
+                        maxlength="16"
+                        required
+                    >
+
+                    <p class="input-hint">
+                        Example: 0712345678
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    id="payButton"
+                    class="pay-button"
+                >
+                    <span id="buttonText">
+                        Pay Now
+                    </span>
+                </button>
+
+            </form>
+
+
+            <div
+                id="status"
+                class="status hidden"
+                data-state="pending"
+                role="status"
+                aria-live="polite"
+            >
+                <div id="statusIcon" class="status-icon"></div>
+
+                <div class="status-body">
+                    <p id="statusTitle" class="status-title"></p>
+
+                    <p id="statusMessage" class="status-message"></p>
+
+                    <button
+                        type="button"
+                        id="checkAgain"
+                        class="status-action hidden"
+                    >
+                        Check again
+                    </button>
+                </div>
+            </div>
+
+
+            <p class="security-note">
+                Sandbox demo. Test payments only.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>

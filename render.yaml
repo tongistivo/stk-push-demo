@@ -1,0 +1,30 @@
+# Render Blueprint: creates the free web service. Secrets are NOT stored here;
+# every "sync: false" value is typed into the Render dashboard by you.
+services:
+  - type: web
+    name: stk-push-demo
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    # One worker + threads keeps memory low on the free plan (512 MB).
+    startCommand: gunicorn server:app --workers 1 --threads 4 --timeout 60 --bind 0.0.0.0:$PORT
+    healthCheckPath: /api/test
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: MAX_AMOUNT
+        value: "1000"
+      - key: DATABASE_URL
+        sync: false
+      - key: DARAJA_CONSUMER_KEY
+        sync: false
+      - key: DARAJA_CONSUMER_SECRET
+        sync: false
+      - key: DARAJA_SHORTCODE
+        sync: false
+      - key: DARAJA_PASSKEY
+        sync: false
+      - key: CALLBACK_TOKEN
+        sync: false
+      - key: DARAJA_CALLBACK_URL
+        sync: false

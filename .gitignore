@@ -1,0 +1,29 @@
+# Secrets - never commit these
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local databases and logs
+*.db
+*.sqlite
+*.sqlite3
+*.log
+logs/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Node (optional frontend tests)
+node_modules/

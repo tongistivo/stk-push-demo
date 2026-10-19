@@ -1,0 +1,6 @@
+{
+  "name": "stk-frontend-tests",
+  "private": true,
+  "scripts": { "test": "node --test" },
+  "devDependencies": { "jsdom": "^26.0.0" }
+}
